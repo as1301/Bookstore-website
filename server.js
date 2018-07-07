@@ -16,7 +16,13 @@ app.use(function  (req,  res,  next) {
 });
 
 
-app.use('/', express.static(path.join(__dirname, 'public')))
+
+app.use(express.static(__dirname + '/dist/fa'));
 app.use('/api', require('./routes/api').route)
+
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname + '/dist/fa/index.html'));
+});
+  
 
 app.listen(PORT, () => console.log('Server started at http://localhost:'+PORT))
